@@ -1,0 +1,73 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x21e8d70 .scope module, "tb_P2" "tb_P2" 2 1;
+ .timescale 0 0;
+v0x221daa0_0 .var "a", 0 0;
+v0x221db40_0 .var "b", 0 0;
+v0x221dbf0_0 .var "c", 0 0;
+v0x221dca0_0 .net "d", 0 0, L_0x221e060; 1 drivers
+v0x221dd80_0 .net "e", 0 0, L_0x221df60; 1 drivers
+S_0x220a2c0 .scope module, "MI" "P2" 2 4, 3 1, S_0x21e8d70;
+ .timescale 0 0;
+L_0x221de30 .functor AND 1, v0x221daa0_0, v0x221db40_0, C4<1>, C4<1>;
+L_0x221df60 .functor NOT 1, v0x221dbf0_0, C4<0>, C4<0>, C4<0>;
+L_0x221e060 .functor OR 1, L_0x221de30, L_0x221df60, C4<0>, C4<0>;
+v0x220a3b0_0 .net "a", 0 0, v0x221daa0_0; 1 drivers
+v0x221d730_0 .net "b", 0 0, v0x221db40_0; 1 drivers
+v0x221d7d0_0 .net "c", 0 0, v0x221dbf0_0; 1 drivers
+v0x221d870_0 .net "e", 0 0, L_0x221de30; 1 drivers
+v0x221d920_0 .alias "x", 0 0, v0x221dca0_0;
+v0x221d9c0_0 .alias "y", 0 0, v0x221dd80_0;
+    .scope S_0x21e8d70;
+T_0 ;
+    %vpi_call 2 7 "$dumpfile", "Example.vcd";
+    %vpi_call 2 8 "$dumpvars", 2'sb01, S_0x21e8d70;
+    %set/v v0x221daa0_0, 0, 1;
+    %set/v v0x221db40_0, 0, 1;
+    %set/v v0x221dbf0_0, 0, 1;
+    %delay 20, 0;
+    %set/v v0x221daa0_0, 0, 1;
+    %set/v v0x221db40_0, 0, 1;
+    %set/v v0x221dbf0_0, 1, 1;
+    %delay 20, 0;
+    %set/v v0x221daa0_0, 0, 1;
+    %set/v v0x221db40_0, 1, 1;
+    %set/v v0x221dbf0_0, 0, 1;
+    %delay 20, 0;
+    %set/v v0x221daa0_0, 0, 1;
+    %set/v v0x221db40_0, 1, 1;
+    %set/v v0x221dbf0_0, 1, 1;
+    %delay 20, 0;
+    %set/v v0x221daa0_0, 1, 1;
+    %set/v v0x221db40_0, 0, 1;
+    %set/v v0x221dbf0_0, 0, 1;
+    %delay 20, 0;
+    %set/v v0x221daa0_0, 1, 1;
+    %set/v v0x221db40_0, 0, 1;
+    %set/v v0x221dbf0_0, 1, 1;
+    %delay 20, 0;
+    %set/v v0x221daa0_0, 1, 1;
+    %set/v v0x221db40_0, 1, 1;
+    %set/v v0x221dbf0_0, 0, 1;
+    %delay 20, 0;
+    %set/v v0x221daa0_0, 1, 1;
+    %set/v v0x221db40_0, 1, 1;
+    %set/v v0x221dbf0_0, 1, 1;
+    %end;
+    .thread T_0;
+    .scope S_0x21e8d70;
+T_1 ;
+    %delay 200, 0;
+    %vpi_call 2 18 "$finish";
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "tb_P2.v";
+    "P2.v";
