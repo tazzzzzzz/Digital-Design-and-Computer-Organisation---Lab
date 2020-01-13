@@ -120,6 +120,34 @@ endmodule
 
 module dfrl (input wire clk, reset, load, in, output wire out);
   wire _in;
-  dfr dfr_1(clk, reset, _in, out);
   mux2 mux2_0(out, in, load, _in);
+  dfr dfr_1(clk, reset, _in, out);
+endmodule
+
+module dfs (input wire clk, set, in, output wire out);
+  wire dfr_in,dfr_out;
+  invert invert_0(in, dfr_in);
+  invert invert_1(dfr_out, out);
+  dfr dfr_2(clk, set, dfr_in, dfr_out);
+endmodule
+
+module dfsl (input wire clk, set, load, in, output wire out);
+  wire _in;
+  mux2 mux2_0(out, in, load, _in);
+  dfs dfs_1(clk, set, _in, out);
+endmodule
+
+module fa (input wire i0, i1, cin, output wire sum, cout);
+   wire t0, t1, t2;
+   xor3 _i0 (i0, i1, cin, sum);
+   and2 _i1 (i0, i1, t0);
+   and2 _i2 (i1, cin, t1);
+   and2 _i3 (cin, i0, t2);
+   or3 _i4 (t0, t1, t2, cout);
+endmodule
+
+module addsub (input wire addsub, i0, i1, cin, output wire sumdiff, cout);
+  wire t;
+  fa _i0 (i0, t, cin, sumdiff, cout);
+  xor2 _i1 (i1, addsub, t);
 endmodule
